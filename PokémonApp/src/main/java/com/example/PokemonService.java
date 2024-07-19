@@ -28,4 +28,20 @@ public class PokemonService {
             return pokemonList.getResults();
         }
     }
+
+    public static PokemonDetail getPokemonDetail(String pokemonUrl) throws IOException {
+        Request request = new Request.Builder()
+                .url(pokemonUrl)
+                .build();
+
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            }
+
+            String responseBody = response.body().string();
+            PokemonDetail pokemonDetail = mapper.readValue(responseBody, PokemonDetail.class);
+            return pokemonDetail;
+        }
+    }
 }

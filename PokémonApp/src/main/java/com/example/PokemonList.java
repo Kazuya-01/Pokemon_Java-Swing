@@ -8,7 +8,6 @@ public class PokemonList {
     private String previous;
     private List<Pokemon> results;
 
-
     public int getCount() {
         return count;
     }
